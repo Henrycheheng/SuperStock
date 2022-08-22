@@ -1,0 +1,28 @@
+{
+	"files": [],
+	"references": [
+		{
+			"path": "./tsconfig.config.json"
+		},
+		{
+			"path": "./tsconfig.app.json"
+		},
+		{
+			"path": "./tsconfig.vitest.json"
+		}
+	],
+	"compilerOptions": {
+		"isolatedModules": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"baseUrl": "src",
+		"paths": {
+			"app/*": ["app/*"],
+			"config/*": ["app/_config/*"],
+			"environment/*": ["environments/*"],
+			"shared/*": ["app/_shared/*"],
+			"helpers/*": ["helpers/*"],
+			"tests/*": ["tests/*"]
+		}
+	}
+}
