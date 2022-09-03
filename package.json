@@ -15,7 +15,7 @@
     "lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,css,json,tsx,html,vue,less,md}\"",
     "lint:style": "stylelint --fix \"**/*.{css,tsx,html,vue,less}\" --cache --cache-location node_modules/.cache/stylelint",
     "lint:ls-lint": "ls-lint",
-    "lint:lint-staged": "lint-staged -c ./.husky/lintstagedrc.js",
+    "lint:lint-staged": "lint-staged -c .husky/lintstagedrc.js",
     "lint:pretty": "pretty-quick --staged",
     "install:husky": "is-ci || husky install",
     "postinstall": "npm run install:husky",
