@@ -10,19 +10,19 @@ module.exports = {
   // 扩展
   extends: [
     'eslint:recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:prettier/recommended',
     "plugin:@typescript-eslint/recommended",
-    'prettier',
     'plugin:prettier/recommended',
-    "react-app"
+    'prettier',
+    'plugin: vue/vue3-recommended'
   ],
   parserOptions: {
     ecmaVersion: 13,
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
+    jsxPragma: 'React'
     ecmaFeatures: {
       jsx: true,
+      tsx: true,
     },
   },
   // 插件
@@ -31,7 +31,6 @@ module.exports = {
   rules: {
     "react-hooks/rules-of-hooks": "error",
     '@typescript-eslint/ban-ts-ignore': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
@@ -41,7 +40,28 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'no-var': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^h$'
+        /*
+          下面都会视为使用了变量
+          被调用 (foo()) 或 作为构造函数 (new foo())
+          被读取 (var y = x)
+          作为参数传递给函数 (doSomething(foo))
+          在一个函数的内部读取，这个函数被传递给另一个函数 (doSomething(function() { foo(); }))
+        */
+        varsIgnorePattern: '^h$'
+      }
+    ],
+    'no-var': 'error',q
+    "no-unused-vars":  [
+      'error',
+      {
+        argsIgnorePattern: '^h$'
+        varsIgnorePattern: '^h$'
+      }
+    ],
     'prettier/prettier': 'error',
     // 禁止出现console
     'no-console': 'warn',
@@ -160,6 +180,9 @@ module.exports = {
     'no-extra-boolean-cast': 'warn',
     'no-case-declarations': 'warn',
     'no-async-promise-executor': 'warn',
+    // vue
+    'vue/attributes/order': 'warn',
+    'vue/one-component-per-file': 'warn',
   },
   globals: {
     defineProps: 'readonly',

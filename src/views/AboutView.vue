@@ -1,22 +1,14 @@
-<script setup lang='ts'>
-import { useCounterStore } from "@/stores/counter";
-const counter = useCounterStore
-</script>
-
-
 <template>
-  <div class="about">
-    <h1>{{ counter }}</h1>
+  <div>
+    {{ env }}
   </div>
 </template>
 
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const env = ref(import.meta.env.VITE_PORT);
+</script>
 
 <style scoped>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
 </style>
