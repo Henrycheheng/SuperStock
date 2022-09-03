@@ -436,3 +436,17 @@ npx husky add .husky/commit-msg
 
 # 创建一个任务文件
 npx husky add .husky/pre-commit
+
+### 消息助手
+
+```bash
+pnpm i commitizen -D
+```
+
+- 初始化，以什么格式询问
+
+```bash
+npx commitizen init cz-conventional-changelog --yarn --dev --exact
+
+pnpm i czg cz-git -D
+```
