@@ -450,3 +450,67 @@ npx commitizen init cz-conventional-changelog --yarn --dev --exact
 
 pnpm i czg cz-git -D
 ```
+
+### 使用conventional-changelog-cli生成版本记录
+
+```bash
+pnpm i conventional-changelog-cli -g -D
+```
+
+### vite.config.ts
+
+#### defineConfig
+
+- 接受一个用户的配置对象
+- 或者接受一个函数，函数可以入参一个配置对象,里面有2个值 command,mode
+
+- command: 用来区分生产，开发环境
+- mode: 用来区分传递的script是什么模式
+
+
+
+```ts
+import { fileURLToPath } from 'url';
+// > This function ensures the correct decodings of percent-encoded characters as well as ensuring a cross-platform valid absolute path string.
+
+// 可以不用引入node的path包，并且防止解析了一个不存在于目录的路径
+
+const __filename = fileURLToPath(import.meta.url);
+
+new URL('file:///C:/path/').pathname;      // Incorrect: /C:/path/
+fileURLToPath('file:///C:/path/');         // Correct:   C:\path\ (Windows)
+```
+
+### npm 安装机制
+
+- npm 和 yarn 同时使用有没有问题
+- 重新删除安装是否有风险
+- lock锁文件是否要提交到仓库
+- dev和dependencies是否有影响
+
+> 1. 获取缓存路径
+> 2. 清楚缓存： pnpm cache clean --force (一直提示安装不上包，1.清楚锁文件 2.删除缓存 3.pnpm i 4.cmd管理员打开)
+ 3  npx
+
+### vite的情景配置
+
+```ts
+export default defineConfig(({ command, mode }) => {
+  if (command === 'serve') {
+    return {
+      // serve 独有配置
+    }
+  } else {
+    return {
+      // build 独有配置
+    }
+  }
+})
+```
+
+
+dotenv它能将环境变量中的变量从 .env 文件加载到 process.env 中。
+> 解析值本身以及它所包含的所有属性，会按照一定的顺序（从最最里层的属性开始，一级级往外，最终到达顶层，也就是解析值本身）分别的去调用 reviver 函数，在调用过程中，当前属性所属的对象会作为 this 值，当前属性名和属性值会分别作为第一个和第二个参数传入 reviver 中。如果 reviver 返回 undefined，则当前属性会从所属对象中删除，如果返回了其他值，则返回的值会成为当前属性新的属性值
+
+### wrapperEnv
+

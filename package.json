@@ -21,7 +21,8 @@
     "install:husky": "is-ci || husky install",
     "postinstall": "npm run install:husky",
     "clean:cache": " rimraf node_modules/.cache/ rimraf node_modules/.vite",
-    "reinstall": "rimraf pnpm-lock.yaml && rimraf node_modules && pnpm install"
+    "reinstall": "rimraf pnpm-lock.yaml && rimraf node_modules && pnpm install",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "dependencies": {
     "pinia": "^2.0.17",
@@ -43,6 +44,7 @@
     "@vue/eslint-config-typescript": "^11.0.0",
     "@vue/test-utils": "^2.0.2",
     "@vue/tsconfig": "^0.1.3",
+    "antd": "^4.23.0",
     "autoprefixer": "^10.4.8",
     "cypress": "^10.4.0",
     "cz-git": "^1.3.11",
