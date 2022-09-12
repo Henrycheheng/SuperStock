@@ -514,3 +514,9 @@ dotenv它能将环境变量中的变量从 .env 文件加载到 process.env 中�
 
 ### wrapperEnv
 
+
+### nodemon
+
+nodemon dir/*.js --watch 监视文件
+
+###

@@ -13,7 +13,7 @@ dist
 dist-ssr
 coverage
 *.local
-/typescript
+# /typescript
 
 /cypress/videos/
 /cypress/screenshots/
