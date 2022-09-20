@@ -1,4 +1,5 @@
 // section2: Partial
+// Partial好处就是他不会破坏原结构
 
 /**
  * Make all properties in T optional

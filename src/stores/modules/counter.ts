@@ -3,22 +3,40 @@ import { defineStore } from 'pinia';
 export const counters = defineStore({
   id: 'counters',
   state: () => ({
-    counter: 0
+    counter: 0,
+    list: [
+      {
+        bugNum: 1000007
+      },
+      {
+        bugNum: 1000001
+      },
+    ]
   }),
   getters: {
     doubleCount: state => state.counter * 2
   },
   actions: {
     increment() {
-      this.counter++
+      this.list[0].bugNum++
     },
-    async getLogin() {
-      const { list } = await getLoginApi<Array<number>>()
-      this.counter = list.counter
+    incrementCounter() {
+      this.counter++
     }
+    // async getLogin() {
+    //   const { list } = await getLoginApi()
+    //   console.log('list', list)
+    // }
   }
 })
-function getLoginApi<T>(): { list: any; } | PromiseLike<{ list: any; }> {
-  return new Promise<{ list: any; }>((resolve, reject) => { resolve({ list: 2 }) })
-}
+
+
+// function getLoginApi(): Promise<any> {
+//   return new Promise((resolve, reject) => {
+//     resolve({
+//       list: []
+//     }),
+//     reject((err: Error) => {console.log('err', err)})
+//   })
+// }
 
