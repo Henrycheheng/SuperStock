@@ -522,4 +522,66 @@ nodemon dir/*.js --watch 监视文件
 ### Typescript
 > 见注释
 
-### 
+### yarn
+
+- 2016 npm v3,没有锁文件
+- 确定性
+  - yarn.lock，可以保证安装稳定性，=> 无论依赖顺序如何
+- 扁平的模块模式
+  - 将不同版本依赖包按照一定策略 归纳成 一个 特定的版本（归并）
+- 网络性能更好
+  - yarn 要求排队，类似于并发的连接池
+  - 如果安装失败，重新进行安装（重试机制）
+- 缓存机制
+ - 离线模式，npm 6.0以上的版本
+
+#### 所以我们下期看一下yarn.lock的结构
+
+- 相比于npm，yarn区别在于lock中的版本号是不固定 =>
+  - 单独一个锁文件yarn.lock是没办法决定一个包的版本号，需要结合package.json
+  - synp
+    - 互相切换npm和yarn的锁文件
+    - 是否和pnpm 切换？
+  - 缓存
+    - yarn cache dir - 查看缓存目录
+    - yarn使用 perfer-online,优先使用网络资源
+      - npm看你有无锁文件，有锁文件=> 走缓存 => 不是并发，走网络会很慢
+      - yarn 优先网络，并发并且排队模式
+
+- yarn 区别于npm 命令
+npm i  yarn add
+
+#### yarn 独有的功能
+yarn import
+yarn license
+yarn pack 创建包依赖项的压缩 gzip 存档
+yarn why 查看为什么需要某个依赖
+yarn autoclean
+
+ - yarn autoclean -init
+ - 经过一个install
+ - 经过一个add
+ - 如果yarn autoclean --force运行
+
+### yarn安装机制
+
+- 1. yarn检查包
+解析是否检查是否有锁文件（package-lock.json）,提示冲突
+- 2. 解析包
+首先， 解析`dependencies`，`devDependencies`
+遍历首层依赖，然后找包版本信息
+会递归查找某个包下面的嵌套依赖
+ - 避免重复安装
+  - 将解析的包和正在解析的包存在 Set,可以自动去重
+ - 对于没有解析过的包，会首先走yarn.lock文件，从这里获取版本信息，标记为已解析
+ - 如果在lock文件没找到，会向yarn的默认源发请求，获取已知版本的最高版本号的信息，并且标记为已解析
+
+### yanr的解析包机制
+见processon导图
+
+### CI环境下的npm优化机制
+
+
+
+
+

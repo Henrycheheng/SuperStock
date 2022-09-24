@@ -10,26 +10,25 @@ module.exports = {
   // 扩展
   extends: [
     'eslint:recommended',
-    "plugin:@typescript-eslint/recommended",
+    'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'prettier',
-    'plugin: vue/vue3-recommended'
+    'plugin:vue/vue3-recommended',
   ],
   parserOptions: {
     ecmaVersion: 13,
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
-    jsxPragma: 'React'
+    jsxPragma: 'React',
     ecmaFeatures: {
       jsx: true,
       tsx: true,
     },
   },
   // 插件
-  plugins: ['react', '@typescript-eslint', "react-hooks", 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier'],
   // 规则
   rules: {
-    "react-hooks/rules-of-hooks": "error",
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
@@ -43,7 +42,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
-        argsIgnorePattern: '^h$'
+        argsIgnorePattern: '^h$',
         /*
           下面都会视为使用了变量
           被调用 (foo()) 或 作为构造函数 (new foo())
@@ -51,16 +50,16 @@ module.exports = {
           作为参数传递给函数 (doSomething(foo))
           在一个函数的内部读取，这个函数被传递给另一个函数 (doSomething(function() { foo(); }))
         */
-        varsIgnorePattern: '^h$'
-      }
+        varsIgnorePattern: '^h$',
+      },
     ],
-    'no-var': 'error',q
-    "no-unused-vars":  [
+    'no-var': 'error',
+    'no-unused-vars': [
       'error',
       {
-        argsIgnorePattern: '^h$'
-        varsIgnorePattern: '^h$'
-      }
+        argsIgnorePattern: '^h$',
+        varsIgnorePattern: '^h$',
+      },
     ],
     'prettier/prettier': 'error',
     // 禁止出现console
@@ -153,8 +152,8 @@ module.exports = {
     'no-mixed-spaces-and-tabs': 'warn',
     // 禁止出现多行空行
     'no-multiple-empty-lines': 'warn',
-    // 禁止出现;
-    semi: ['warn', 'never'],
+    // // 禁止出现;
+    // semi: ['warn', 'never'],
     // 强制在块之前使用一致的空格
     'space-before-blocks': 'warn',
     // 强制在 function的左括号之前使用一致的空格
@@ -181,7 +180,6 @@ module.exports = {
     'no-case-declarations': 'warn',
     'no-async-promise-executor': 'warn',
     // vue
-    'vue/attributes/order': 'warn',
     'vue/one-component-per-file': 'warn',
   },
   globals: {

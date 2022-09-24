@@ -1,5 +1,4 @@
-
-import { counters } from "./modules/counter";
+import { counters } from './modules/counter'
 
 export default function useStore() {
   return {

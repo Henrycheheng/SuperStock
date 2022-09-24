@@ -1,50 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+  <body>
+    <script>
+      const vnode = {
+        tag: 'div',
+        props: {
+          onClick: () => alert('hello world'),
+        },
+        children: '点击',
+      }
 
-<body>
-  <script>
-    const vnode = {
-      tag: 'div',
-      props: {
-        onClick: () => alert('hello world')
-      },
-      children: '点击'
-    }
+      function render(vnode, container) {
+        // vnode的tag属性来作为创建 dom的元素
+        const el = document.createElement(vnode?.tag)
 
-    function render(vnode, container) {
-      // vnode的tag属性来作为创建 dom的元素
-      const el = document.createElement(vnode?.tag)
-
-      // 遍历vnode的props属性
-      for (const key in vnode.props) {
-        if (/^on/.test(key)) {
-          el.addEventListener(
-            key.substr(2).toLowerCase(), // click
-            vnode?.props[key]
-          )
+        // 遍历vnode的props属性
+        for (const key in vnode.props) {
+          if (/^on/.test(key)) {
+            el.addEventListener(
+              key.substr(2).toLowerCase(), // click
+              vnode?.props[key]
+            )
+          }
         }
+
+        // children
+        if (typeof vnode?.children === 'string') {
+          el.appendChild(document.createTextNode(vnode.children))
+        } else if (Array.isArray(vnode?.children)) {
+          // 使用当前元素的el作为挂载点
+          vnode.children.forEach((child) => render(child, el))
+        }
+
+        container.appendChild(el)
       }
 
-      // children
-      if (typeof vnode?.children === 'string') {
-        el.appendChild(document.createTextNode(vnode.children))
-      } else if (Array.isArray(vnode?.children)) {
-        // 使用当前元素的el作为挂载点
-        vnode.children.forEach((child) => render(child, el))
-      }
-
-      container.appendChild(el)
-    }
-
-    render(vnode, document.body)
-  </script>
-</body>
-
+      render(vnode, document.body)
+    </script>
+  </body>
 </html>

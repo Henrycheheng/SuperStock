@@ -1,5 +1,3 @@
-
-
 /**
  * Construct a type with the properties of T except for those in type K.
  */
@@ -12,11 +10,9 @@ interface IPerson {
 
 type TPerson = Omit<IPerson, 'name'>
 
-
 type Omit1<T, K extends keyof number | string | symbol> = {
-  [P in Exclude<keyof T, K>]: T[P];
+  [P in Exclude<keyof T, K>]: T[P]
 }
-
 
 // keyof T = 'name' | 'age'
 /*
@@ -35,4 +31,3 @@ type Omit1<T, K extends keyof number | string | symbol> = {
         - 一真为真，会返回never，表示在这个继承的类型里面，如果当前的类型不在继承类型里面，此时会返回本身类型
         - 一假则为假，就会返回本身类型
 */
-

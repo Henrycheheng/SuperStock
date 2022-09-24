@@ -3,7 +3,6 @@
  */
 // type Exclude<T, U> = T extends U ? never : T;
 
-
 // 如果是第一个参数联合类型，分别将参数拿去执行extends,若果是返回（只要有一个是就会返回never）never，如果不在U里面，返回本身
 
 type AType = 'name' | 'age' | 'gender'

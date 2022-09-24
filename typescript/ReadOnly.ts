@@ -1,5 +1,3 @@
-
-
 interface IPerson1 {
   name: string
   age: number
@@ -16,10 +14,9 @@ const a11: IPerson1 = {
   age: 1,
   girlFirend: {
     name: '1',
-    age: 1
+    age: 1,
   },
 }
-
 
 /**
  * Make all properties in T readonly
@@ -30,7 +27,6 @@ const a11: IPerson1 = {
 */
 
 type ReadonlyPerson = Readonly<IPerson1>
-
 
 // [P in keyof T]: T[P]
 // 1. P泛型参数
@@ -47,20 +43,16 @@ type ReadonlyPerson = Readonly<IPerson1>
 // -- 重要
 // 5. T[P]就代表用 T泛型去读P这个遍历的索引签名的或者属性映射的 类型值，比如 IPerson1[name]的类型是 number
 
-
 const xiaomi: ReadonlyPerson = {
   name: 'John',
   age: 10,
   girlFirend: {
     // name: 1,  // 深层
     name: '10',
-    age: 10
-  }
+    age: 10,
+  },
 }
 
 // xiaomi.age = '1' // 无法分配到 "age" ，因为它是只读属性。
 // xiaomi.name = 109 // 无法分配到 "age" ，因为它是只读属性。
 xiaomi.girlFirend.age = 1 // 可以分配给索引签名的深层次属性
-
-
-

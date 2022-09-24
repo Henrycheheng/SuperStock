@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 
 export const counters = defineStore({
   id: 'counters',
@@ -6,15 +6,15 @@ export const counters = defineStore({
     counter: 0,
     list: [
       {
-        bugNum: 1000007
+        bugNum: 1000007,
       },
       {
-        bugNum: 1000001
+        bugNum: 1000001,
       },
-    ]
+    ],
   }),
   getters: {
-    doubleCount: state => state.counter * 2
+    doubleCount: (state) => state.counter * 2,
   },
   actions: {
     increment() {
@@ -22,14 +22,13 @@ export const counters = defineStore({
     },
     incrementCounter() {
       this.counter++
-    }
+    },
     // async getLogin() {
     //   const { list } = await getLoginApi()
     //   console.log('list', list)
     // }
-  }
+  },
 })
-
 
 // function getLoginApi(): Promise<any> {
 //   return new Promise((resolve, reject) => {
@@ -39,4 +38,3 @@ export const counters = defineStore({
 //     reject((err: Error) => {console.log('err', err)})
 //   })
 // }
-

@@ -16,7 +16,6 @@ const p1: PersonKey = 'name'
 const p2: PersonKey = 'age'
 // const p3: PersonKey = 'height'
 
-
 // section1: Record
 // type Record<K extends string | number | symbol, T> = { [P in K]: T; }
 type TMytype = {
@@ -38,11 +37,11 @@ type Person = Record<string, PersonModel>
 const school: Person = {
   person1: {
     name: '1',
-    age: 10
+    age: 10,
   },
   person2: {
     name: '1',
-    age: 10
+    age: 10,
   },
 }
 
@@ -60,14 +59,12 @@ type Records<K extends string | number | symbol, T> = {
 // 验证Record
 
 interface IPageInfo {
-  title: string;
+  title: string
 }
 
 type Page = 'home' | 'about' | 'contact' | 'shoppingCart' | 'shoppingCart1'
 
-function fn(test: Record<Page, IPageInfo>) {
-
-}
+function fn(test: Record<Page, IPageInfo>) {}
 
 fn({
   home: { title: 'Home' },

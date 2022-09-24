@@ -3,14 +3,14 @@
  * 使用场景： 后端接口返回值有大量相同，但是不整合接口 => Pcik<a接口，a接口中的想要拿到新接口的字段，以keyof字段的key的联合类型传入>
  */
 type Pick1<T, K extends keyof T> = {
-  [P in K]: T[P];
-};
+  [P in K]: T[P]
+}
 
 interface IPick {
-  name: string;
-  age: number;
-  age1: number;
-  age2: number;
+  name: string
+  age: number
+  age1: number
+  age2: number
 }
 
 // keyof T === 'name' | 'age'
@@ -30,22 +30,19 @@ type TSomePerson = Pick1<IPick, 'age' | 'age1' | 'age2'>
 */
 
 // 1
-export type TExtends<T, U> = T extends U ? number : never;
+export type TExtends<T, U> = T extends U ? number : never
 // T(number)是 U(number | string)的子集，所以返回number
-type TExtendsExample1 = TExtends<number, number | string>; // number
+type TExtendsExample1 = TExtends<number, number | string> // number
 
 // T(boolean) 不是 U(number | string)的子集，所以返回never
-type TExtendsExample2 = TExtends<boolean, number | string>; // never
+type TExtendsExample2 = TExtends<boolean, number | string> // never
 
 // 2 如果T是联合类型
-type NonNullable<T> = T extends null | undefined ? never : T;
+type NonNullable<T> = T extends null | undefined ? never : T
 
 // T(number | string) 不是 U(null | undefined) 的子集，所以返回 T
 // 如果是传入的泛型T是联合类型，就会把联合类型中的每一项拿出来形成分别看是否继承于 null | undefined
-type TNonNullableExample1 = NonNullable<number | string>; // number | string
+type TNonNullableExample1 = NonNullable<number | string> // number | string
 
 // T(string | null) 中 string 不是 U 的子集返回 string，null 是 U 的子集，返回 never
-type TNonNullableExample2 = NonNullable<string | null>; // string 一真就不会取never,交叉类型一假就会取never
-
-
-
+type TNonNullableExample2 = NonNullable<string | null> // string 一真就不会取never,交叉类型一假就会取never

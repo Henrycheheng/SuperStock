@@ -24,7 +24,7 @@ export function wrapperEnv(envConfig: Recordable): IViteEnv {
   for (const envName of Object.keys(envConfig)) {
     let realName = envConfig[envName].replace(/\\n/g, '\n') // TODO
 
-    realName = (realName === 'true') ? true : (realName === 'false' ? false : realName) // true or false or realName
+    realName = realName === 'true' ? true : realName === 'false' ? false : realName // true or false or realName
 
     if (envName === 'VITE_PORT') {
       realName = Number(realName)
@@ -32,7 +32,9 @@ export function wrapperEnv(envConfig: Recordable): IViteEnv {
     if (envName === 'VITE_PROXY') {
       try {
         realName = JSON.parse(realName)
-      } catch (error) { }
+      } catch (error) {
+        console.warn(error)
+      }
     }
     ret[envName] = realName
     process.env[envName] = realName

@@ -9,8 +9,8 @@
 // };
 
 interface Person1 {
-  name: string;
-  age: number;
+  name: string
+  age: number
 }
 
 // const person1: Person1 = {} 类型“{}”缺少类型“Person1”中的以下属性: name, age
@@ -23,8 +23,8 @@ const person3: Partial<Person1> = { name: 'John' } // 可以
 
 // 实现原理
 type Partial1<T> = {
-  [P in keyof T]?: T[P];
-};
+  [P in keyof T]?: T[P]
+}
 
 // in 遍历T泛型
 // 1. name | age，将接口的属性名会拿出来，会去遍历这个属性名形成联合类型
@@ -34,12 +34,11 @@ type Partial1<T> = {
 // 4. keyof 和Record的第一个参数效果是一样的，将接口的属性名会拿出来，会去遍历这个属性名形成联合类型
 
 interface Person2 {
-  name: string;
-  age: number;
-  location: string;
+  name: string
+  age: number
+  location: string
 }
 
-type K1 = keyof Person2; // "name" | "age" | "location"
-type K2 = keyof Person2[];  // number | "length" | "push" | "concat" | ...
-type K3 = keyof { [x: string]: Person2 };  // string | number
-
+type K1 = keyof Person2 // "name" | "age" | "location"
+type K2 = keyof Person2[] // number | "length" | "push" | "concat" | ...
+type K3 = keyof { [x: string]: Person2 } // string | number
