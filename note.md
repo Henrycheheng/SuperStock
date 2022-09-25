@@ -2,10 +2,10 @@
 
 页面包括的元素
 
-- DOM Level  一样
-- attribute  静态属性一样 : v-bind
-- event      @v-on
-- DOM的树形结构节点  一样
+- DOM Level 一样
+- attribute 静态属性一样 : v-bind
+- event @v-on
+- DOM 的树形结构节点 一样
 
 ```ts
 cosnt title = {
@@ -25,12 +25,12 @@ cosnt title = {
 </title>
 ```
 
-### Vnode描述DOM
+### Vnode 描述 DOM
 
 ```ts
 let level = 3
 const title = {
-    tag: `h${level}`
+  tag: `h${level}`,
 }
 ```
 
@@ -40,9 +40,9 @@ const title = {
 import { h } from 'vue'
 
 export default {
-    render () {
-         return h('h1',{onClick: handler})
-    }
+  render() {
+    return h('h1', { onClick: handler })
+  },
 }
 ```
 
@@ -76,90 +76,89 @@ function render (vnode,container) {
 render(vnode,document.body)
 ```
 
-### TS配置
+### TS 配置
 
 ```json
 {
-	"files": [],
-	"references": [
-		{
-			"path": "./tsconfig.config.json"
-		},
-		{
-			"path": "./tsconfig.app.json"
-		},
-		{
-			"path": "./tsconfig.vitest.json"
-		}
-	],
-	"compilerOptions": {
-		// ↓指定ECMAScript目标版本，esnext为最新版本
-		"target": "esnext",
-		// ↓指定生成哪个模块系统代码，esnext为最新版本
-		"module": "esnext",
-		// ↓决定如何处理模块。
-		"moduleResolution": "node",
-		// ↓启用所有严格类型检查选项。
-		"strict": true,
-		// ↓禁止对同一个文件的不一致的引用。
-		"forceConsistentCasingInFileNames": true,
-		// ↓允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
-		"allowSyntheticDefaultImports": true,
-		// ↓禁用函数参数双向协变检查。
-		"strictFunctionTypes": false,
-		// ↓在 .tsx文件里支持JSX
-		"jsx": "preserve",
-		// ↓解析非相对模块名的基准目录。查看 模块解析文档了解详情。
-		"baseUrl": ".",
-		// ↓允许编译javascript文件。
-		"allowJs": true,
-		// ↓生成相应的 .map文件。
-		"sourceMap": true,
-		"esModuleInterop": true,
-		"resolveJsonModule": true,
-		// ↓若有未使用的局部变量则抛错。
-		"noUnusedLocals": true,
-		// ↓若有未使用的参数则抛错。
-		"noUnusedParameters": true,
-		// ↓启用实验性的ES装饰器。
-		"experimentalDecorators": true,
-		// ↓编译过程中需要引入的库文件的列表。
-		"lib": ["dom", "esnext"],
-		// ↓要包含的类型声明文件名列表。
-		"types": ["vite/client"],
-		// ↓要包含的类型声明文件路径列表。
-		"typeRoots": ["./node_modules/@types/", "./types"],
-		"incremental": true,
-		// ↓在表达式和声明上有隐含的 any类型时报错。
-		"noImplicitAny": false,
-		// ↓忽略所有的声明文件（ *.d.ts）的类型检查。
-		"skipLibCheck": true,
-		// ↓模块名到基于 baseUrl的路径映射的列表。查看 模块解析文档了解详情。
-		"paths": {
-			"/@/*": ["src/*"],
-			"/#/*": ["types/*"],
-			"app/*": ["app/*"],
-			"config/*": ["app/_config/*"],
-			"environment/*": ["environments/*"],
-			"shared/*": ["app/_shared/*"],
-			"helpers/*": ["helpers/*"],
-			"tests/*": ["tests/*"]
-		}
-	},
-	// ↓指定一个匹配列表（属于自动指定该路径下的所有ts相关文件）
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.d.ts",
-		"src/**/*.tsx",
-		"src/**/*.vue",
-		"types/**/*.d.ts",
-		"types/**/*.ts",
-		"mock/**/*.ts"
-	],
-	// 指定一个排除列表（include的反向操作）
-	"exclude": ["node_modules", "dist", "**/*.js"]
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ],
+  "compilerOptions": {
+    // ↓指定ECMAScript目标版本，esnext为最新版本
+    "target": "esnext",
+    // ↓指定生成哪个模块系统代码，esnext为最新版本
+    "module": "esnext",
+    // ↓决定如何处理模块。
+    "moduleResolution": "node",
+    // ↓启用所有严格类型检查选项。
+    "strict": true,
+    // ↓禁止对同一个文件的不一致的引用。
+    "forceConsistentCasingInFileNames": true,
+    // ↓允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
+    "allowSyntheticDefaultImports": true,
+    // ↓禁用函数参数双向协变检查。
+    "strictFunctionTypes": false,
+    // ↓在 .tsx文件里支持JSX
+    "jsx": "preserve",
+    // ↓解析非相对模块名的基准目录。查看 模块解析文档了解详情。
+    "baseUrl": ".",
+    // ↓允许编译javascript文件。
+    "allowJs": true,
+    // ↓生成相应的 .map文件。
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    // ↓若有未使用的局部变量则抛错。
+    "noUnusedLocals": true,
+    // ↓若有未使用的参数则抛错。
+    "noUnusedParameters": true,
+    // ↓启用实验性的ES装饰器。
+    "experimentalDecorators": true,
+    // ↓编译过程中需要引入的库文件的列表。
+    "lib": ["dom", "esnext"],
+    // ↓要包含的类型声明文件名列表。
+    "types": ["vite/client"],
+    // ↓要包含的类型声明文件路径列表。
+    "typeRoots": ["./node_modules/@types/", "./types"],
+    "incremental": true,
+    // ↓在表达式和声明上有隐含的 any类型时报错。
+    "noImplicitAny": false,
+    // ↓忽略所有的声明文件（ *.d.ts）的类型检查。
+    "skipLibCheck": true,
+    // ↓模块名到基于 baseUrl的路径映射的列表。查看 模块解析文档了解详情。
+    "paths": {
+      "/@/*": ["src/*"],
+      "/#/*": ["types/*"],
+      "app/*": ["app/*"],
+      "config/*": ["app/_config/*"],
+      "environment/*": ["environments/*"],
+      "shared/*": ["app/_shared/*"],
+      "helpers/*": ["helpers/*"],
+      "tests/*": ["tests/*"]
+    }
+  },
+  // ↓指定一个匹配列表（属于自动指定该路径下的所有ts相关文件）
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/**/*.d.ts",
+    "types/**/*.ts",
+    "mock/**/*.ts"
+  ],
+  // 指定一个排除列表（include的反向操作）
+  "exclude": ["node_modules", "dist", "**/*.js"]
 }
-
 ```
 
 ### eslint
@@ -185,10 +184,10 @@ module.exports = {
     'eslint:recommended',
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
-    "plugin:@typescript-eslint/recommended",
+    'plugin:@typescript-eslint/recommended',
     'prettier',
     'plugin:prettier/recommended',
-    "react-app"
+    'react-app',
   ],
   parserOptions: {
     ecmaVersion: 13,
@@ -199,10 +198,10 @@ module.exports = {
     },
   },
   // 插件
-  plugins: ['react', '@typescript-eslint', "react-hooks", 'prettier'],
+  plugins: ['react', '@typescript-eslint', 'react-hooks', 'prettier'],
   // 规则
   rules: {
-    "react-hooks/rules-of-hooks": "error",
+    'react-hooks/rules-of-hooks': 'error',
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -349,9 +348,9 @@ module.exports = {
 pnpm i eslint-plugin-vue vue-eslint-parser --dev
 ```
 
-### 将插件集成到eslint.js中
+### 将插件集成到 eslint.js 中
 
-### 将ts集成到vue项目
+### 将 ts 集成到 vue 项目
 
 ```bash
 pnpm i @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
@@ -381,7 +380,6 @@ pnpm i stylelint stylelint-config-standard stylelint-config-prettier stylelint-o
 pnpm i postcss autoprefixer -D
 ```
 
-
 ### rimraf
 
 ```bash
@@ -390,7 +388,7 @@ pnpm i rimraf -D
 
 ### huksy
 
-- lint操作
+- lint 操作
 - commit message 拦截
 - prettier
 
@@ -398,8 +396,7 @@ pnpm i rimraf -D
 pnpm i husky lint-staged @commitlint/cli @commitlint/config-conventional pretty-quick -D
 ```
 
-#### 生成git hooks的钩子
-
+#### 生成 git hooks 的钩子
 
 ```bash
 npx husky install
@@ -407,7 +404,7 @@ npx husky install
 
 ### common shell
 
-### .husky目录下 lintstagedrc.js
+### .husky 目录下 lintstagedrc.js
 
 ```js
 module.exports = {
@@ -417,8 +414,7 @@ module.exports = {
   '*.vue': ['prettier --write', 'stylelint --fix'],
   '*.{less,css,html}': ['stylelint --fix', 'prettier --write'],
   '*.md': ['prettier --write'],
-};
-
+}
 ```
 
 ### sciprt
@@ -428,13 +424,16 @@ module.exports = {
   "lint:lint-pretty": "pretty-quick --staged", // Runs Prettier on your changed files.
 ```
 
-# 启动husky
+# 启动 husky
+
 pnpm install: husky
 
 # 添加一个消息任务到这个文件
+
 npx husky add .husky/commit-msg
 
 # 创建一个任务文件
+
 npx husky add .husky/pre-commit
 
 ### 消息助手
@@ -451,7 +450,7 @@ npx commitizen init cz-conventional-changelog --yarn --dev --exact
 pnpm i czg cz-git -D
 ```
 
-### 使用conventional-changelog-cli生成版本记录
+### 使用 conventional-changelog-cli 生成版本记录
 
 ```bash
 pnpm i conventional-changelog-cli -g -D
@@ -462,37 +461,35 @@ pnpm i conventional-changelog-cli -g -D
 #### defineConfig
 
 - 接受一个用户的配置对象
-- 或者接受一个函数，函数可以入参一个配置对象,里面有2个值 command,mode
+- 或者接受一个函数，函数可以入参一个配置对象,里面有 2 个值 command,mode
 
 - command: 用来区分生产，开发环境
-- mode: 用来区分传递的script是什么模式
-
-
+- mode: 用来区分传递的 script 是什么模式
 
 ```ts
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url'
 // > This function ensures the correct decodings of percent-encoded characters as well as ensuring a cross-platform valid absolute path string.
 
 // 可以不用引入node的path包，并且防止解析了一个不存在于目录的路径
 
-const __filename = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(import.meta.url)
 
-new URL('file:///C:/path/').pathname;      // Incorrect: /C:/path/
-fileURLToPath('file:///C:/path/');         // Correct:   C:\path\ (Windows)
+new URL('file:///C:/path/').pathname // Incorrect: /C:/path/
+fileURLToPath('file:///C:/path/') // Correct:   C:\path\ (Windows)
 ```
 
 ### npm 安装机制
 
 - npm 和 yarn 同时使用有没有问题
 - 重新删除安装是否有风险
-- lock锁文件是否要提交到仓库
-- dev和dependencies是否有影响
+- lock 锁文件是否要提交到仓库
+- dev 和 dependencies 是否有影响
 
 > 1. 获取缓存路径
-> 2. 清楚缓存： pnpm cache clean --force (一直提示安装不上包，1.清楚锁文件 2.删除缓存 3.pnpm i 4.cmd管理员打开)
- 3  npx
+> 2. 清楚缓存： pnpm cache clean --force (一直提示安装不上包，1.清楚锁文件 2.删除缓存 3.pnpm i 4.cmd 管理员打开)
+>    3 npx
 
-### vite的情景配置
+### vite 的情景配置
 
 ```ts
 export default defineConfig(({ command, mode }) => {
@@ -508,18 +505,18 @@ export default defineConfig(({ command, mode }) => {
 })
 ```
 
+dotenv 它能将环境变量中的变量从 .env 文件加载到 process.env 中。
 
-dotenv它能将环境变量中的变量从 .env 文件加载到 process.env 中。
 > 解析值本身以及它所包含的所有属性，会按照一定的顺序（从最最里层的属性开始，一级级往外，最终到达顶层，也就是解析值本身）分别的去调用 reviver 函数，在调用过程中，当前属性所属的对象会作为 this 值，当前属性名和属性值会分别作为第一个和第二个参数传入 reviver 中。如果 reviver 返回 undefined，则当前属性会从所属对象中删除，如果返回了其他值，则返回的值会成为当前属性新的属性值
 
 ### wrapperEnv
 
-
 ### nodemon
 
-nodemon dir/*.js --watch 监视文件
+nodemon dir/\*.js --watch 监视文件
 
 ### Typescript
+
 > 见注释
 
 ### yarn
@@ -533,55 +530,53 @@ nodemon dir/*.js --watch 监视文件
   - yarn 要求排队，类似于并发的连接池
   - 如果安装失败，重新进行安装（重试机制）
 - 缓存机制
- - 离线模式，npm 6.0以上的版本
+- 离线模式，npm 6.0 以上的版本
 
-#### 所以我们下期看一下yarn.lock的结构
+#### 所以我们下期看一下 yarn.lock 的结构
 
-- 相比于npm，yarn区别在于lock中的版本号是不固定 =>
-  - 单独一个锁文件yarn.lock是没办法决定一个包的版本号，需要结合package.json
+- 相比于 npm，yarn 区别在于 lock 中的版本号是不固定 =>
+
+  - 单独一个锁文件 yarn.lock 是没办法决定一个包的版本号，需要结合 package.json
   - synp
-    - 互相切换npm和yarn的锁文件
-    - 是否和pnpm 切换？
+    - 互相切换 npm 和 yarn 的锁文件
+    - 是否和 pnpm 切换？
   - 缓存
     - yarn cache dir - 查看缓存目录
-    - yarn使用 perfer-online,优先使用网络资源
-      - npm看你有无锁文件，有锁文件=> 走缓存 => 不是并发，走网络会很慢
+    - yarn 使用 perfer-online,优先使用网络资源
+      - npm 看你有无锁文件，有锁文件=> 走缓存 => 不是并发，走网络会很慢
       - yarn 优先网络，并发并且排队模式
 
-- yarn 区别于npm 命令
-npm i  yarn add
+- yarn 区别于 npm 命令
+  npm i yarn add
 
 #### yarn 独有的功能
+
 yarn import
 yarn license
 yarn pack 创建包依赖项的压缩 gzip 存档
 yarn why 查看为什么需要某个依赖
 yarn autoclean
 
- - yarn autoclean -init
- - 经过一个install
- - 经过一个add
- - 如果yarn autoclean --force运行
+- yarn autoclean -init
+- 经过一个 install
+- 经过一个 add
+- 如果 yarn autoclean --force 运行
 
-### yarn安装机制
+### yarn 安装机制
 
-- 1. yarn检查包
-解析是否检查是否有锁文件（package-lock.json）,提示冲突
+- 1. yarn 检查包
+     解析是否检查是否有锁文件（package-lock.json）,提示冲突
 - 2. 解析包
-首先， 解析`dependencies`，`devDependencies`
-遍历首层依赖，然后找包版本信息
-会递归查找某个包下面的嵌套依赖
- - 避免重复安装
-  - 将解析的包和正在解析的包存在 Set,可以自动去重
- - 对于没有解析过的包，会首先走yarn.lock文件，从这里获取版本信息，标记为已解析
- - 如果在lock文件没找到，会向yarn的默认源发请求，获取已知版本的最高版本号的信息，并且标记为已解析
+     首先， 解析`dependencies`，`devDependencies`
+     遍历首层依赖，然后找包版本信息
+     会递归查找某个包下面的嵌套依赖
+- 避免重复安装
+- 将解析的包和正在解析的包存在 Set,可以自动去重
+- 对于没有解析过的包，会首先走 yarn.lock 文件，从这里获取版本信息，标记为已解析
+- 如果在 lock 文件没找到，会向 yarn 的默认源发请求，获取已知版本的最高版本号的信息，并且标记为已解析
 
-### yanr的解析包机制
-见processon导图
+### yanr 的解析包机制
 
-### CI环境下的npm优化机制
+见 processon 导图
 
-
-
-
-
+###

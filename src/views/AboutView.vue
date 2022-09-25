@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs, watch } from 'vue'
+  import { ref, toRefs } from 'vue'
   import HelloWorld from '@/components/HelloWorld.vue'
   import useStore from '../stores'
   import { storeToRefs } from 'pinia'

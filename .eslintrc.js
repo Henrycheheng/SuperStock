@@ -6,14 +6,15 @@ module.exports = {
     es2021: true,
   },
   // 解析器
-  parser: '@typescript-eslint/parser',
+  parser: 'vue-eslint-parser',
   // 扩展
   extends: [
-    'eslint:recommended',
+    // 'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
-    'prettier',
+    'plugin:vue/base',
     'plugin:vue/vue3-recommended',
+    'prettier',
   ],
   parserOptions: {
     ecmaVersion: 13,

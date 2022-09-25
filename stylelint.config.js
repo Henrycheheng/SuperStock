@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   plugins: ['stylelint-order'],
-  extends: ['stylelint-config-standard', 'stylelint-config-prettier']
+  extends: ['stylelint-config-standard', 'stylelint-config-prettier'],
   rules: {
     // ↓禁止使用未知的伪类选择器。
     'selector-pseudo-class-no-unknown': [
@@ -193,10 +193,5 @@ module.exports = {
       'speak',
     ],
   },
-  ignoreFiles: [
-    '**./*.js,',
-    '**./*.ts,',
-    '**./*.tsx,',
-    '**./*.jsx,'
-  ]
+  ignoreFiles: ['**./*.js,', '**./*.ts,', '**./*.tsx,', '**./*.jsx,'],
 }
