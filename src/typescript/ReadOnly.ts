@@ -56,3 +56,12 @@ const xiaomi: ReadonlyPerson = {
 // xiaomi.age = '1' // 无法分配到 "age" ，因为它是只读属性。
 // xiaomi.name = 109 // 无法分配到 "age" ，因为它是只读属性。
 xiaomi.girlFirend.age = 1 // 可以分配给索引签名的深层次属性
+
+// readonly和as const的关系：
+/*
+  1。联系和区别：
+    - 告诉编译器，变量是只读
+    - 区别：
+      - readOnly无法识别修改深层次的可读对象
+      - as const 可以识别你修改了深层次的可读对象的某个属性
+*/

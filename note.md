@@ -579,4 +579,90 @@ yarn autoclean
 
 见 processon 导图
 
-###
+### Vite 配置之 root 和 base 和 reslove.alias
+
+- reslove.alias
+- 引用别名
+- 保证入口的统一性
+
+- Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>
+
+  > 当使用文件系统路径的别名时，请始终使用绝对路径。
+
+### Vite server.port
+
+类型： number
+默认值： 5173
+指定开发服务器端口。注意：如果端口已经被使用，Vite 会自动尝试下一个可用的端口，所以这可能不是开发服务器最终监听的实际端口
+
+- npx vite --port=4000
+
+### server.proxy
+
+- Record<string, string | ProxyOptions>
+
+```ts
+/** Changes the origin of the host header to the target URL. */
+  changeOrigin?: boolean | undefined
+
+export declare interface ProxyOptions extends HttpProxy.ServerOptions {
+    /**
+     * rewrite path
+     */
+    rewrite?: (path: string) => string;
+    /**
+     * configure the proxy server (e.g. listen to events)
+     */
+    configure?: (proxy: HttpProxy.Server, options: ProxyOptions) => void;
+    /**
+     * webpack-dev-server style bypass function
+     */
+    bypass?: (req: http.IncomingMessage, res: http.ServerResponse, options: ProxyOptions) => void | null | undefined | false | string;
+}
+```
+
+- rewrite | configure | bypass,经查看,不在 extends 的里面,会返回自己的类型
+
+### server.proxy
+
+proxy?: Record<string, string | ProxyOptions>;
+
+> key 是不能叫 接口 ServerOptions 里面的 索引签名
+
+```md
+target:url 模块要解析的 url 字符串
+
+Forward: url 模块要解析的 url 字符串
+
+Agent:传递给 http(s)的对象。 请求(参见节点的 https 代理和 http 代理对象)
+
+ssl:要传递给 http . createserver()的对象
+// TODO: ssl 证书 https://www.kaspersky.com.cn/resource-center/definitions/what-is-a-ssl-certificate
+
+Ws: true/false，如果你想代理 websockets
+
+Xfwd: true/false，添加 x-forward 报头
+
+secure: true/false，如果您想验证 SSL 证书
+
+toProxy: true/false，传递绝对 URL 作为路径(用于代理到代理)
+
+prependPath: true/false，默认值:true -指定是否要将目标路径前置到代理路径
+
+ignorePath: true/false，默认值:false -指定是否要忽略传入请求的代理路径(注意:如果需要，您将不得不手动添加/)。
+
+localAddress:要为传出连接绑定的本地接口字符串
+
+changeOrigin: true/false，默认值:false -将主机头的起点更改为目标 URL
+
+preserveHeaderKeyCase: true/false，默认值:false -指定是否保留响应头键的字母大小写
+// j_sessionId,返回 cooikes,可能需要
+
+auth:基本的身份验证。 'user:password'计算授权头。
+
+hostRewrite 重定向到(201/301/302/307/308)上的位置主机名。
+
+autoRewrite:重写基于请求的主机/端口重定向的位置主机/端口(201/301/302/307/308)。 默认值:false。
+
+protocolRewrite:重写(201/301/302/307/308)重定向到'http'或'https'的位置协议。 默认值:空。
+```

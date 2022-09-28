@@ -19,7 +19,7 @@ export interface IViteEnv {
 }
 
 export function wrapperEnv(envConfig: Recordable): IViteEnv {
-  const ret: any = {}
+  const ret: any = {} // TODO 实际上不能是any
 
   for (const envName of Object.keys(envConfig)) {
     let realName = envConfig[envName].replace(/\\n/g, '\n') // TODO
