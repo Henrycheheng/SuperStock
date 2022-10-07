@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 /**
  * Construct a type with the properties of T except for those in type K.
  */
 // type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
-
 interface IPerson {
   name?: string
   age?: number

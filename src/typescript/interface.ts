@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 interface IMessage {
   usernames: string[]
   password?: string | number
-  event?: _MouseEvent & _KeyboardEvent
+  event?: MouseEvent & KeyboardEvent
 }
 
 // 联合类型，只要满足其中一种类型就可以

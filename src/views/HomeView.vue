@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <a-space>
     <a-select
       v-model:value="province"
@@ -18,12 +18,12 @@
   import { defineComponent, reactive, toRefs, computed, watch } from 'vue'
   const arr = [
     {
-      projectId: 'console-framework',
+      projectId: 'AAAA',
       version: ['22.5.0', '22.6.0'],
     },
     {
-      projectId: 'cf-ui',
-      version: ['乌兰查布', '乌兰查布'],
+      projectId: 'BBBB',
+      version: ['ccc', 'cccc'],
     },
   ]
 
@@ -33,8 +33,8 @@
 
   const versionStr = arr.map((item) => item.version)
   const cityData = {
-    'console-framework': [...versionStr][0],
-    'cf-ui': [...versionStr][1],
+    AAAA: [...versionStr][0],
+    BBBB: [...versionStr][1],
   }
 
   console.log('cityData :>> ', cityData)
@@ -65,4 +65,4 @@
       return { ...toRefs(state), cities }
     },
   })
-</script>
+</script> -->

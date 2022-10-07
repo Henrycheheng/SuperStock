@@ -623,7 +623,7 @@ export declare interface ProxyOptions extends HttpProxy.ServerOptions {
 
 - rewrite | configure | bypass,经查看,不在 extends 的里面,会返回自己的类型
 
-### server.proxy
+### server.proxy 提取 createProxy 函数
 
 proxy?: Record<string, string | ProxyOptions>;
 
@@ -665,4 +665,541 @@ hostRewrite 重定向到(201/301/302/307/308)上的位置主机名。
 autoRewrite:重写基于请求的主机/端口重定向的位置主机/端口(201/301/302/307/308)。 默认值:false。
 
 protocolRewrite:重写(201/301/302/307/308)重定向到'http'或'https'的位置协议。 默认值:空。
+```
+
+> export type ProxyList = ProxyItem[] // 方法接收的参数 需要导出这个类型到`utils`
+
+- 导出到 以供 VITE_PROXY: ProxyList 使用
+
+### Vite 配置之`HMR`
+
+- 用于 HMR websocket 必须使用不同的 http 服务器地址的情况
+- Hot Module Repleaced
+
+```ts
+
+// https://cn.vitejs.dev/config/server-options.html#server-hmr
+server.HMR : boolean |
+{
+  protocol?: string, // 协议类型
+  host?: string, // 域名
+  port?: number, // 开发服务器 -- 一般都会有跨域的问题 => server  2 server,或者 nginx 生产环境配置
+  path?: string, // 路径
+  timeout?: number, // 计时操作，超时操作
+  overlay?: boolean, // 一般不开启
+  clientPort?: number, // clientPort 是一个高级选项，只在客户端的情况下覆盖端口，这允许你为 websocket 提供不同的端口，而并非在客户端代码中查找。如果需要在 dev-server 情况下使用 SSL 代理，这非常有用。
+  server?: Server
+}
+
+```
+
+#### class Server extends NetServer
+
+```ts
+class Server extends NetServer {
+  constructor(requestListener?: RequestListener)
+  constructor(options: ServerOptions, requestListener?: RequestListener)
+  /**
+   * Sets the timeout value for sockets, and emits a `'timeout'` event on
+   * the Server object, passing the socket as an argument, if a timeout
+   * occurs.
+   *
+   * If there is a `'timeout'` event listener on the Server object, then it
+   * will be called with the timed-out socket as an argument.
+   *
+   * By default, the Server does not timeout sockets. However, if a callback
+   * is assigned to the Server's `'timeout'` event, timeouts must be handled
+   * explicitly.
+   * @since v0.9.12
+   * @param [msecs=0 (no timeout)]
+   */
+  setTimeout(msecs?: number, callback?: () => void): this
+  setTimeout(callback: () => void): this
+  /**
+   * Limits maximum incoming headers count. If set to 0, no limit will be applied.
+   * @since v0.7.0
+   */
+  maxHeadersCount: number | null
+  /**
+   * The maximum number of requests socket can handle
+   * before closing keep alive connection.
+   *
+   * A value of `0` will disable the limit.
+   *
+   * When the limit is reached it will set the `Connection` header value to `close`,
+   * but will not actually close the connection, subsequent requests sent
+   * after the limit is reached will get `503 Service Unavailable` as a response.
+   * @since v16.10.0
+   */
+  maxRequestsPerSocket: number | null
+  /**
+   * The number of milliseconds of inactivity before a socket is presumed
+   * to have timed out.
+   *
+   * A value of `0` will disable the timeout behavior on incoming connections.
+   *
+   * The socket timeout logic is set up on connection, so changing this
+   * value only affects new connections to the server, not any existing connections.
+   * @since v0.9.12
+   */
+  timeout: number
+  /**
+   * Limit the amount of time the parser will wait to receive the complete HTTP
+   * headers.
+   *
+   * In case of inactivity, the rules defined in `server.timeout` apply. However,
+   * that inactivity based timeout would still allow the connection to be kept open
+   * if the headers are being sent very slowly (by default, up to a byte per 2
+   * minutes). In order to prevent this, whenever header data arrives an additional
+   * check is made that more than `server.headersTimeout` milliseconds has not
+   * passed since the connection was established. If the check fails, a `'timeout'`event is emitted on the server object, and (by default) the socket is destroyed.
+   * See `server.timeout` for more information on how timeout behavior can be
+   * customized.
+   * @since v11.3.0, v10.14.0
+   */
+  headersTimeout: number
+  /**
+   * The number of milliseconds of inactivity a server needs to wait for additional
+   * incoming data, after it has finished writing the last response, before a socket
+   * will be destroyed. If the server receives new data before the keep-alive
+   * timeout has fired, it will reset the regular inactivity timeout, i.e.,`server.timeout`.
+   *
+   * A value of `0` will disable the keep-alive timeout behavior on incoming
+   * connections.
+   * A value of `0` makes the http server behave similarly to Node.js versions prior
+   * to 8.0.0, which did not have a keep-alive timeout.
+   *
+   * The socket timeout logic is set up on connection, so changing this value only
+   * affects new connections to the server, not any existing connections.
+   * @since v8.0.0
+   */
+  keepAliveTimeout: number
+  /**
+   * Sets the timeout value in milliseconds for receiving the entire request from
+   * the client.
+   *
+   * If the timeout expires, the server responds with status 408 without
+   * forwarding the request to the request listener and then closes the connection.
+   *
+   * It must be set to a non-zero value (e.g. 120 seconds) to protect against
+   * potential Denial-of-Service attacks in case the server is deployed without a
+   * reverse proxy in front.
+   * @since v14.11.0
+   */
+  requestTimeout: number
+  addListener(event: string, listener: (...args: any[]) => void): this
+  addListener(event: 'close', listener: () => void): this
+  addListener(event: 'connection', listener: (socket: Socket) => void): this
+  addListener(event: 'error', listener: (err: Error) => void): this
+  addListener(event: 'listening', listener: () => void): this
+  addListener(event: 'checkContinue', listener: RequestListener): this
+  addListener(event: 'checkExpectation', listener: RequestListener): this
+  addListener(event: 'clientError', listener: (err: Error, socket: stream.Duplex) => void): this
+  addListener(
+    event: 'connect',
+    listener: (req: IncomingMessage, socket: stream.Duplex, head: Buffer) => void
+  ): this
+  addListener(event: 'request', listener: RequestListener): this
+  addListener(
+    event: 'upgrade',
+    listener: (req: IncomingMessage, socket: stream.Duplex, head: Buffer) => void
+  ): this
+  emit(event: string, ...args: any[]): boolean
+  emit(event: 'close'): boolean
+  emit(event: 'connection', socket: Socket): boolean
+  emit(event: 'error', err: Error): boolean
+  emit(event: 'listening'): boolean
+  emit(event: 'checkContinue', req: IncomingMessage, res: ServerResponse): boolean
+  emit(event: 'checkExpectation', req: IncomingMessage, res: ServerResponse): boolean
+  emit(event: 'clientError', err: Error, socket: stream.Duplex): boolean
+  emit(event: 'connect', req: IncomingMessage, socket: stream.Duplex, head: Buffer): boolean
+  emit(event: 'request', req: IncomingMessage, res: ServerResponse): boolean
+  emit(event: 'upgrade', req: IncomingMessage, socket: stream.Duplex, head: Buffer): boolean
+  on(event: string, listener: (...args: any[]) => void): this
+  on(event: 'close', listener: () => void): this
+  on(event: 'connection', listener: (socket: Socket) => void): this
+  on(event: 'error', listener: (err: Error) => void): this
+  on(event: 'listening', listener: () => void): this
+  on(event: 'checkContinue', listener: RequestListener): this
+  on(event: 'checkExpectation', listener: RequestListener): this
+  on(event: 'clientError', listener: (err: Error, socket: stream.Duplex) => void): this
+  on(
+    event: 'connect',
+    listener: (req: IncomingMessage, socket: stream.Duplex, head: Buffer) => void
+  ): this
+  on(event: 'request', listener: RequestListener): this
+  on(
+    event: 'upgrade',
+    listener: (req: IncomingMessage, socket: stream.Duplex, head: Buffer) => void
+  ): this
+  once(event: string, listener: (...args: any[]) => void): this
+  once(event: 'close', listener: () => void): this
+  once(event: 'connection', listener: (socket: Socket) => void): this
+  once(event: 'error', listener: (err: Error) => void): this
+  once(event: 'listening', listener: () => void): this
+  once(event: 'checkContinue', listener: RequestListener): this
+  once(event: 'checkExpectation', listener: RequestListener): this
+  once(event: 'clientError', listener: (err: Error, socket: stream.Duplex) => void): this
+  once(
+    event: 'connect',
+    listener: (req: IncomingMessage, socket: stream.Duplex, head: Buffer) => void
+  ): this
+  once(event: 'request', listener: RequestListener): this
+  once(
+    event: 'upgrade',
+    listener: (req: IncomingMessage, socket: stream.Duplex, head: Buffer) => void
+  ): this
+  prependListener(event: string, listener: (...args: any[]) => void): this
+  prependListener(event: 'close', listener: () => void): this
+  prependListener(event: 'connection', listener: (socket: Socket) => void): this
+  prependListener(event: 'error', listener: (err: Error) => void): this
+  prependListener(event: 'listening', listener: () => void): this
+  prependListener(event: 'checkContinue', listener: RequestListener): this
+  prependListener(event: 'checkExpectation', listener: RequestListener): this
+  prependListener(event: 'clientError', listener: (err: Error, socket: stream.Duplex) => void): this
+  prependListener(
+    event: 'connect',
+    listener: (req: IncomingMessage, socket: stream.Duplex, head: Buffer) => void
+  ): this
+  prependListener(event: 'request', listener: RequestListener): this
+  prependListener(
+    event: 'upgrade',
+    listener: (req: IncomingMessage, socket: stream.Duplex, head: Buffer) => void
+  ): this
+  prependOnceListener(event: string, listener: (...args: any[]) => void): this
+  prependOnceListener(event: 'close', listener: () => void): this
+  prependOnceListener(event: 'connection', listener: (socket: Socket) => void): this
+  prependOnceListener(event: 'error', listener: (err: Error) => void): this
+  prependOnceListener(event: 'listening', listener: () => void): this
+  prependOnceListener(event: 'checkContinue', listener: RequestListener): this
+  prependOnceListener(event: 'checkExpectation', listener: RequestListener): this
+  prependOnceListener(
+    event: 'clientError',
+    listener: (err: Error, socket: stream.Duplex) => void
+  ): this
+  prependOnceListener(
+    event: 'connect',
+    listener: (req: IncomingMessage, socket: stream.Duplex, head: Buffer) => void
+  ): this
+  prependOnceListener(event: 'request', listener: RequestListener): this
+  prependOnceListener(
+    event: 'upgrade',
+    listener: (req: IncomingMessage, socket: stream.Duplex, head: Buffer) => void
+  ): this
+}
+```
+
+### build.minify （除非做组件库，否则不需要配置）
+
+类型： boolean | 'terser' | 'esbuild'
+默认： 'esbuild'
+
+压缩率 只差 1%-2%。就多了 40kb https://github.com/privatenumber/minification-benchmarks
+速度 快了 20 倍， 393ms 24ms
+
+注意，在 lib 模式下使用 'es' 时，build.minify 选项不会缩减空格，因为会移除掉 pure 标注，导致破坏 tree-shaking。
+
+> /_#**PURE**_/ 通过类似于这种东西识别 tree-shaking
+
+terser 需要下载 pnpm add -D terser
+
+### build.outDir
+
+类型： string
+默认： dist
+指定输出路径(相对于 项目根目录).
+
+### build.dynamicImportVarsOptions
+
+```ts
+export declare interface RollupDynamicImportVarsOptions {
+  /**
+   * Files to include in this plugin (default all).
+   * @default []
+   */
+  include?: string | RegExp | (string | RegExp)[]
+  /**
+   * Files to exclude in this plugin (default none).
+   * @default []
+   */
+  exclude?: string | RegExp | (string | RegExp)[]
+  /**
+   * By default, the plugin quits the build process when it encounters an error. If you set this option to true, it will throw a warning instead and leave the code untouched.
+   * @default false
+   */
+  warnOnError?: boolean
+}
+```
+
+#### 防止动态导入出错时，进程被杀掉
+
+```ts
+    build: {
+      outDir: OUTPUT_DIR,
+      dynamicImportVarsOptions: {
+        warnOnError: true,
+      },
+    },
+```
+
+### Vite 配置之排除打包
+
+- 给 rollupOptions 传递更细的配置，external 即可，是个数组，由字符串和正则构成
+
+### vite 提高构建性能
+
+> reportCompressedSize: false，不使用 gzip 压缩报告
+
+- 1.不考虑性能优化
+- 2. 大型文件比如 echarts 和 lodash.es 这种包
+
+### chunk 分包警告
+
+chunkSizeWarningLimit
+
+### Vite 配置之 define
+
+define
+类型： Record<string, string>
+定义全局常量替换方式。其中每项在开发环境下会被定义在全局，而在构建时被静态替换。
+
+从 2.0.0-beta.70 开始，string 值会以原始表达式形式使用，所以如果定义了一个字符串常量，它需要被显式地打引号。（例如使用 JSON.stringify）
+
+为了与 esbuild 的行为保持一致，表达式必须为一个 JSON 对象（null、boolean、number、string、数组或对象），亦或是一个单独的标识符。
+
+替换只会在匹配到周围不是其他字母、数字、\_ 或 $ 时执行
+
+#### note
+
+// vite-env.d.ts
+
+```ts
+declare const **APP_VERSION**: string
+// https://cn.vitejs.dev/config/shared-options.html#define
+```
+
+由于开发模式和构建模式实现 define 的差异性，我们应该避免采用一些可能导致不一致的用例。
+
+例如：
+
+const obj = {
+**NAME**, // 不要以缩写形式定义对象属性
+**KEY**: value // 不要定义对象的 key
+}
+
+### vite 配置之 preprocessorOptions
+
+Record： Record 的内部定义，接收两个泛型参数；Record 后面的泛型就是对象键和值的类型
+
+```ts
+  css: {
+      preprocessorOptions: {
+        less: {
+          addtionalData: `$injectedColor: orange`,
+        },
+      },
+    },
+```
+
+```bash
+pnpm i less -D
+```
+
+### less
+
+#### 变量
+
+@: 表示要声明一个变量
+
+```less
+@width: 10px;
+@height: @width + 10px;
+
+#header {
+  width: @width;
+  height: @height;
+}
+```
+
+```bash
+lessc index.less
+```
+
+#### Mixins(混合)
+
+混合（Mixin）是一种将一组属性从一个规则集包含（或混入）到另一个规则集的方法。假设我们定义了一个类（class）如下：
+
+> 想混合，只需要把选择器在需要使用的地方当成函数调用即可
+
+```less
+.bordered {
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+```
+
+#### 嵌套（Nesting）
+
+```css
+#header {
+  color: black;
+}
+#header .navigation {
+  font-size: 12px;
+}
+#header .logo {
+  width: 300px;
+}
+```
+
+```less
+#header {
+  color: black;
+  .navigation {
+    font-size: 12px;
+  }
+  .logo {
+    width: 300px;
+  }
+}
+```
+
+> 你还可以使用此方法将伪选择器（pseudo-selectors）与混合（mixins）一同使用。下面是一个经典的 clearfix 技巧，重写为一个混合（mixin） (& 表示当前选择器的父级）：
+
+```less
+.clearfix {
+  display: block;
+  zoom: 1;
+
+  &:after {
+    content: ' ';
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+```
+
+#### 运算（Operations）
+
+- 1 算术运算符 +、-、\*、/ 可以对任何`数字`、`颜色`或`变量`进行运算。
+- 2 如果可能的话，算术运算符在加、减或比较之前会进行`单位换算`。
+- 3 计算的结果以`最左侧`操作数的单位类型为准。
+- 4 如果单位换算无效或失去意义，则`忽略单位`。
+- 5 无效的单位换算例如：px 到 cm 或 rad 到 % 的转换。
+
+```less
+// 所有操作数被转换成相同的单位
+@conversion-1: 5cm + 10mm; // 结果是 6cm
+@conversion-2: 2 - 3cm - 5mm; // 结果是 -1.5cm
+
+// conversion is impossible
+@incompatible-units: 2 + 5px - 3cm; // 结果是 4px
+
+// example with variables
+@base: 5%;
+@filler: @base * 2; // 结果是 10%
+@other: @base + @filler; // 结果是 15%
+```
+
+#### 函数
+
+Less 内置了多种函数用于转换颜色、处理字符串、算术运算等。这些函数在 Less 函数手册中有详细介绍。
+
+函数的用法非常简单。下面这个例子将介绍如何利用 percentage 函数将
+0.5 转换为 50%，
+将颜色饱和度增加 5%，
+以及颜色亮度降低 25%
+并且色相值增加 8 等用法：
+
+```less
+@base: #f04615;
+@width: 0.5;
+
+.class {
+  width: percentage(@width); // returns `50%` // 将小数转化为对应的百分比的 函数
+  color: saturate(@base, 5%); // saturate 用来增加颜色饱和度
+  background-color: spin(lighten(@base, 25%), 8);
+}
+```
+
+#### namespace(命名空间)
+
+```less
+#add() {
+  .button {
+    display: block;
+    background-color: grey;
+    border: 1px solid black;
+
+    &:hover {
+      background-color: white;
+    }
+  }
+}
+/*
+  命名空间的代码复用mixin之后，不会进到当前文件的 compile 系统
+  命名空间的包裹的前缀必须是有效的css选择器
+*/
+
+#header a {
+  color: orange;
+  #add.button();
+}
+```
+
+#### 映射（Maps）
+
+```less
+#colors() {
+  primary: blue;
+  secondary: green;
+}
+
+/*
+  Map： 可以取命名空间里面的对应的key的值
+  css属性值可以是命名空间里面的 索引签名，就叫 key
+
+*/
+.button {
+  color: #colors[primary];
+  border: 1px solid #colors[secondary];
+}
+```
+
+### 作用域（Scope）
+
+Less 中的作用域与 CSS 中的作用域非常类似。首先在本地查找变量和混合（mixins），如果找不到，则从“父”级作用域继承。
+
+```less
+@var: red;
+
+#page {
+  @var: white;
+  #header {
+    color: @var; // white
+  }
+}
+```
+
+与 CSS 自定义属性一样，混合（mixin）和变量的定义不必在引用之前事先定义。因此，下面的 Less 代码示例和上面的代码示例是相同的：
+
+```less
+@var: red;
+
+#page {
+  #header {
+    color: @var; // white
+  }
+  @var: white;
+}
+```
+
+#### 导入（Importing）
+
+```less
+@import "library"; // library.less
+@import "typo.css";
 ```

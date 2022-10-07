@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 // section2: Partial
 // Partial好处就是他不会破坏原结构
 

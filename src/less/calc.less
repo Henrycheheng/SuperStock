@@ -1,0 +1,27 @@
+/* stylelint-disable CssSyntaxError */
+@conversion-1: 5cm + 10mm; // 结果是 6cm
+// 5cm + 1cm
+@conversion-2: 2 - 3cm - 5mm; // 结果是 -1.5cm
+
+// conversion is impossible
+@incompatible-units: 2 + 5px - 3cm; // 结果是 4px
+
+// 乘法和除法不作转换。因为这两种运算在大多数情况下都没有意义，一个长度乘以一个长度就得到一个区域，而 CSS 是不支持指定区域的。Less 将按数字的原样进行操作，并将为计算结果指定明确的单位类型。
+
+@base: 2cm * 3mm; // 结果是 6cm
+
+// example with variables
+@base: 5%;
+@filler: @base * 2; // 结果是 10%
+@other: @base + @filler; // 结果是 15%
+
+// 你还可以对颜色进行算术运算：
+@color: (#224488 / 2); // 结果是 #112244
+// background-color: #112244 + #111; // 结果是 #223355
+
+@color: #222 / 2; // results in `#222 / 2`, not #111
+// background-color: (#ffffff / 16); //results is #101010
+
+// 为了与 CSS 保持兼容，calc() 并不对数学表达式进行计算，但是在嵌套函数中会计算变量和数学公式的值。
+@var: 50vh/2;
+// width: calc(50% + (@var - 20px));  // 结果是 calc(50% + (25vh - 20px))

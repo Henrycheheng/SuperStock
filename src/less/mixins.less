@@ -1,0 +1,18 @@
+/* stylelint-disable CssSyntaxError */
+/* mixin */
+/* 想混合，只需要把选择器在需要使用的地方当成函数调用即可 */
+
+#bordered {
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+
+#menu a {
+  #bordered();
+  color: #111;
+}
+
+.post a {
+  color: red;
+  #bordered();
+}

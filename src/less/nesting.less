@@ -1,0 +1,25 @@
+#header {
+  color: black;
+  .navigation {
+    font-size: 12px;
+  }
+  .logo {
+    width: 300px;
+  }
+}
+
+/* 你还可以使用此方法将伪选择器（pseudo-selectors）与混合（mixins）一同使用。下面是一个经典的 clearfix 技巧，重写为一个混合（mixin） (& 表示当前选择器的父级）： */
+
+.clearfix {
+  display: block;
+  zoom: 1;
+  // & === .clearfix
+  &:after {
+    display: block;
+    height: 0;
+    clear: both;
+    font-size: 0;
+    content: '';
+    visibility: hidden;
+  }
+}

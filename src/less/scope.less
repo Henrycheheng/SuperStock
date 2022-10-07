@@ -1,0 +1,11 @@
+@var: red;
+
+/*
+  父作用域一层一层往上找
+*/
+#page {
+  @var: white;
+  #header {
+    color: @var; // white
+  }
+}

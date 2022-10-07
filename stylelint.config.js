@@ -4,19 +4,19 @@ module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-prettier'],
   rules: {
     // ↓禁止使用未知的伪类选择器。
-    'selector-pseudo-class-no-unknown': [
-      true,
-      {
-        ignorePseudoClasses: ['global'],
-      },
-    ],
+    // 'selector-pseudo-class-no-unknown': [
+    //   true,
+    //   {
+    //     ignorePseudoClasses: ['global'],
+    //   },
+    // ],
     // ↓禁止使用未知规则。
-    'at-rule-no-unknown': [
-      true,
-      {
-        ignoreAtRules: ['function', 'if', 'each', 'include', 'mixin'],
-      },
-    ],
+    // 'at-rule-no-unknown': [
+    //   true,
+    //   {
+    //     ignoreAtRules: ['function', 'if', 'each', 'include', 'mixin'],
+    //   },
+    // ],
     // ↓禁止空来源。
     'no-empty-source': null,
     // ↓禁止使用无效的命名网格区域。

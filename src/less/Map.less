@@ -1,0 +1,14 @@
+#colors() {
+  primary: blue;
+  secondary: green;
+}
+
+/*
+  Map： 可以取命名空间里面的对应的key的值
+  css属性值可以是命名空间里面的 索引签名，就叫 key
+
+*/
+.button {
+  color: #colors[primary];
+  border: 1px solid #colors[secondary];
+}

@@ -1,11 +1,13 @@
+/* eslint-disable camelcase */
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-
-import { wrapperEnv } from './build/utils'
 import { resolve } from 'node:path'
+
+import { createProxy } from './build/vite/proxy'
+import { wrapperEnv } from './build/utils'
+import { OUTPUT_DIR } from './build/constant'
 
 function pathResolver(dir: string) {
   return resolve(__dirname, '.', dir)
@@ -21,8 +23,6 @@ export default defineConfig(({ command, mode }) => {
   const { VITE_PORT, VITE_PROXY, VITE_LEGACY, VITE_PUBLIC_PATH, VITE_DROP_CONSOLE } = viteEnv
 
   const isBuild = command === 'build' // TODO
-
-  console.log('import.meta.url', viteEnv)
 
   return {
     base: VITE_PUBLIC_PATH,
@@ -41,15 +41,32 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       port: 4000,
-      proxy: {
-        // 字符串写法
-        foo: 'bar',
-        // 配置选项写法
-        '/api': {
-          // TODO: ssl证书 https://www.kaspersky.com.cn/resource-center/definitions/what-is-a-ssl-certificate
-          target: '111', // 实际请求的地址
-          changeOrigin: true, // 保证头是一样
-          rewrite: (path: string) => path.replace(/^\/api/, ''), // 需要将api和后端对接
+      proxy: createProxy(VITE_PROXY),
+      hmr: {
+        overlay: true,
+      },
+    },
+    build: {
+      outDir: OUTPUT_DIR,
+      // reportCompressedSize: true,
+      rollupOptions: {
+        external: [
+          pathResolver('src/views/render.html'),
+          pathResolver('src/typescript/*.ts'),
+          pathResolver('src/less/*.less'),
+        ],
+      },
+      chunkSizeWarningLimit: 500,
+      reportCompressedSize: true, // 压缩大型输出文件可能会很慢，因此禁用该功能可能会提高大型项目的构建性能。
+    },
+    css: {
+      preprocessorOptions: {
+        less: {
+          modifyVars: {
+            // 用于全局的导入，以避免需要单独导入每个样式文件
+            // reference 避免重复引用的问题
+            hack: `true; @import (reference)"${resolve('src/design//config.less')}"`,
+          },
         },
       },
     },

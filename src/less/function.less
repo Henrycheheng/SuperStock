@@ -1,0 +1,51 @@
+@base: hsl(13, 88%, 51%);
+@base1: hsl(21, 88%, 76%);
+@width: 0.5;
+
+// #region
+/*
+
+  Hue, 色相
+  Saturation, 饱和度
+  Lightness，HSL 亮度
+*/
+
+/*
+  saturate
+  在HSL颜色空间中增加一个绝对数量的颜色饱和度。
+*/
+
+/*
+  desaturate
+  在HSL颜色空间中减小一个绝对数量的颜色饱和度。
+*/
+
+/*
+  lighten
+  Increase the lightness of a color in the HSL color space by an absolute amount.
+*/
+
+/*
+  spin
+  在任意方向旋转颜色的色相角度。
+  虽然角度范围是0-360，它应用mod 360操作，所以你可以传入更大的(或负的)值，它们将环绕，例如角度360和720将产生相同的结果。
+  注意，颜色是通过RGB转换传递的，它不会保留灰色的色调值(因为当没有饱和度时，色调没有任何意义)，所以确保你应用的函数是保留色调的，
+  例如不要这样做:
+    @c: saturate(spin(#aaaaaa, 10), 10%);
+  Do this instead:
+    @c: spin(saturate(#aaaaaa, 10%), 10);
+*/
+// #endregion
+
+/*
+0.5 转换为 50%，
+将颜色饱和度增加 5%，
+以及颜色亮度降低 25%
+并且色相值增加 8
+*/
+.class {
+  width: percentage(@width); // returns `50%` // 将小数转化为对应的百分比的 函数
+  color: saturate(@base, 5%); // saturate 用来增加颜色饱和度
+  color: desaturate(@base, 5%); // saturate 用来降低颜色饱和度
+  background-color: spin(lighten(@base, 25%), 8); // 色相值旋转+8°
+}

@@ -9,7 +9,7 @@ import type { ProxyOptions } from 'vite'
 type ProxyItem = [string, string]
 
 // 方法接收的参数
-type ProxyList = ProxyItem[]
+export type ProxyList = ProxyItem[]
 
 // vite的proxy对象,也就是函数的返回值
 type ProxyTargetList = Record<string, ProxyOptions>
@@ -27,7 +27,7 @@ export function createProxy(list: ProxyList = []) {
       target,
       changeOrigin: true,
       ws: true,
-      rewrite: (path: string) => path.replace(new RegExp(/^\/api/), ''),
+      rewrite: (path: string) => path.replace(new RegExp(`${prefix}`), ''),
       ...(isHttps ? { secure: false } : {}),
     }
   }

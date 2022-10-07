@@ -1,0 +1,20 @@
+#add() {
+  .button {
+    display: block;
+    background-color: grey;
+    border: 1px solid black;
+
+    &:hover {
+      background-color: white;
+    }
+  }
+}
+/*
+  命名空间的代码复用mixin之后，不会进到当前文件的 compile 系统
+  命名空间的包裹的前缀必须是有效的css选择器
+*/
+
+#header a {
+  color: orange;
+  #add.button();
+}

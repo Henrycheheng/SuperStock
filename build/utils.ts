@@ -1,3 +1,5 @@
+import type { ProxyList } from './vite/proxy'
+
 export interface IViteEnv {
   VITE_PORT: number
   VITE_GLOB_APP_TITLE: string
@@ -15,7 +17,7 @@ export interface IViteEnv {
   VITE_USE_PWA: boolean
   VITE_LEGACY: boolean
 
-  VITE_PROXY: Array<string>[]
+  VITE_PROXY: ProxyList
 }
 
 export function wrapperEnv(envConfig: Recordable): IViteEnv {
