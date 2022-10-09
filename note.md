@@ -1200,6 +1200,8 @@ Less 中的作用域与 CSS 中的作用域非常类似。首先在本地查找�
 #### 导入（Importing）
 
 ```less
-@import "library"; // library.less
-@import "typo.css";
+@import 'library'; // library.less
+@import 'typo.css';
 ```
+
+### 色系色版生成的算法

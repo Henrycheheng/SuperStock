@@ -62,11 +62,17 @@ export default defineConfig(({ command, mode }) => {
     css: {
       preprocessorOptions: {
         less: {
+          /*
+            modifyVars用来less文件后面添加，modifyVars对应的对象属性名会添加到@追加到less文件后面
+          */
           modifyVars: {
             // 用于全局的导入，以避免需要单独导入每个样式文件
-            // reference 避免重复引用的问题
-            hack: `true; @import (reference)"${resolve('src/design//config.less')}"`,
+            hack: `true; @import (reference)"${resolve('src/design//config.less')}"`, // reference 避免重复引用的问题
           },
+          javascriptEnabled: true, // less文件支持js的写法
+          /*
+            70行会被解析成， @hack: true， @import (reference)"${resolve('src/design//config.less')}"
+          */
         },
       },
     },
