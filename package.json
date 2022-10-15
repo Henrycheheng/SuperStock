@@ -2,6 +2,9 @@
   "name": "test-app",
   "version": "0.0.0",
   "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs",
     "commit": "czg",
     "dev": "npx --max_old_space_size=4096 vite",
     "build": "run-p type-check build-only",
@@ -71,6 +74,8 @@
     "stylelint-order": "^5.0.0",
     "typescript": "~4.7.4",
     "vite": "^3.0.4",
+    "vitepress": "1.0.0-alpha.20",
+    "vitepress-theme-demoblock": "^1.4.2",
     "vitest": "^0.21.0",
     "vue-eslint-parser": "^9.0.3",
     "vue-tsc": "^0.39.5"
