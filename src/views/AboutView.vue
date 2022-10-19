@@ -20,8 +20,6 @@
 
   const bugNumber = toRefs(list.value.map((item) => item.bugNum))
 
-  console.log('bugNumber :>> ', bugNumber[0])
-
   const msg = ref('hello world112223121')
 </script>
 
