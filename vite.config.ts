@@ -54,6 +54,7 @@ export default defineConfig(({ command, mode }) => {
           pathResolver('src/views/render.html'),
           pathResolver('src/typescript/*.ts'),
           pathResolver('src/less/*.less'),
+          pathResolver('docs/*'),
         ],
       },
       chunkSizeWarningLimit: 500,

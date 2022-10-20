@@ -1,6 +1,5 @@
 ---
 layout: home
-title: 深入学习Vue
 titleTemplate: 一个从零开始的通用模板
 hero:
   name: dive into
@@ -14,7 +13,7 @@ hero:
       link: /guide/
     - theme: alt
       text: 在 github 上查看
-      link: https://github.com/Henrycheheng
+      link: https://github.com/Henrycheheng/SuperStock
 features:
   - icon: 💡
     title: 响应式数据系统
