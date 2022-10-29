@@ -31,6 +31,7 @@ export default defineConfig(({ command, mode }) => {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)), // 引用别名,fileURLToPath为了保证转码不会乱码
       },
+      // #region
       // alias: [
       //   {
       //     // /@/xx => src
@@ -38,6 +39,7 @@ export default defineConfig(({ command, mode }) => {
       //     // replacement: pathResolver('src') + '/',
       //   },
       // ],
+      // #endregion
     },
     server: {
       port: 4000,

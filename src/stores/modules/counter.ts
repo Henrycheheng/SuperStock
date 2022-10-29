@@ -23,7 +23,7 @@ export const counters = defineStore({
     incrementCounter() {
       this.counter++
     },
-    // async getLogin() {
+    // async getLogin<ILogin>() {
     //   const { list } = await getLoginApi()
     //   console.log('list', list)
     // }

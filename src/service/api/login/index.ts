@@ -6,3 +6,5 @@ export const loginApi: T.ILoginApi = {
     return http.post('./login', params)
   },
 }
+
+// login<T.ILoginApi>()

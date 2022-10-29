@@ -8,7 +8,7 @@ axios.defaults.timeout = 10000
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset-UTF-8'
 
 axios.interceptors.request.use(
-  (config: { headers: { token: string } }): AxiosRequestConfig<any> => {
+  (config): AxiosRequestConfig<any> => {
     const token = window.sessionStorage.getItem('token')
 
     if (token) {
@@ -22,23 +22,24 @@ axios.interceptors.request.use(
   }
 )
 
-axios.interceptors.response.use((res: { data: { code: number } }) => {
+axios.interceptors.response.use((res) => {
   if (res.data.code === 200) {
     sessionStorage.setItem('token', '')
     // token过期操作
   }
-  return res
+  return res.data
 })
 
 interface ResType<T> {
   code: number
-  data?: T
   msg: string
+  data?: T
   err?: string
 }
 
 interface Http {
   get<T>(url: string, params?: unknown): Promise<ResType<T>>
+  put<T>(url: string, params?: unknown): Promise<ResType<T>>
   post<T>(url: string, params?: unknown): Promise<ResType<T>>
   upload<T>(url: string, params: unknown): Promise<ResType<T>>
   download(url: string): void
@@ -100,6 +101,21 @@ const http: Http = {
       document.body.removeChild(iframe)
     }
     document.body.appendChild(iframe)
+  },
+  put(url, params) {
+    return new Promise((resolve, reject) => {
+      NProgress.start()
+      axios
+        .put(url, JSON.stringify(params))
+        .then((res) => {
+          NProgress.done()
+          resolve(res.data)
+        })
+        .catch((err: { data: any }) => {
+          NProgress.done()
+          reject(err.data)
+        })
+    })
   },
 }
 export default http

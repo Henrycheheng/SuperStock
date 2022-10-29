@@ -7,6 +7,7 @@ specifiers:
   '@rushstack/eslint-patch': ^1.1.4
   '@types/jsdom': ^20.0.0
   '@types/node': ^16.11.47
+  '@types/nprogress': ^0.2.0
   '@typescript-eslint/eslint-plugin': ^5.36.1
   '@typescript-eslint/parser': ^5.36.1
   '@vitejs/plugin-vue': ^3.0.1
@@ -68,6 +69,7 @@ devDependencies:
   '@rushstack/eslint-patch': 1.1.4
   '@types/jsdom': 20.0.0
   '@types/node': 16.11.48
+  '@types/nprogress': 0.2.0
   '@typescript-eslint/eslint-plugin': 5.36.1_mgwedlyoufw3lg4qjd43432d3q
   '@typescript-eslint/parser': 5.36.1_qugx7qdu5zevzvxaiqyxfiwquq
   '@vitejs/plugin-vue': 3.0.3_vite@3.0.7+vue@3.2.37
@@ -1101,6 +1103,10 @@ packages:
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
+    dev: true
+
+  /@types/nprogress/0.2.0:
+    resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
     dev: true
 
   /@types/parse-json/4.0.0:

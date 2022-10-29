@@ -10,6 +10,7 @@ export default {
     socialLinks: [{ icon: 'github', link: 'https://github.com/Henrycheheng/SuperStock' }],
     sidebar: {
       '/guide/': [
+        // 前端规范
         {
           text: '前端规范',
           items: [
@@ -59,6 +60,7 @@ export default {
             },
           ],
         },
+        // Vite配置
         {
           text: 'Vite配置',
           items: [
@@ -72,6 +74,7 @@ export default {
             },
           ],
         },
+        // Vue
         {
           text: 'Vue',
           items: [
@@ -90,6 +93,7 @@ export default {
             },
           ],
         },
+        // Http
         {
           text: 'Http',
           items: [
@@ -125,6 +129,7 @@ export default {
             },
           ],
         },
+        // node
         {
           text: 'Node',
           items: [
@@ -150,6 +155,7 @@ export default {
             },
           ],
         },
+        // 包管理器
         {
           text: '包管理器',
           items: [
