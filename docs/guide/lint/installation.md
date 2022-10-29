@@ -8,13 +8,13 @@
 
 - ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite 3](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/), [ESBuild](https://github.com/evanw/esbuild) - 就是快！
 
-- 🗂 [基于文件的路由](./src/pages)
+- 🗂 [基于文件的路由](<a href="./src/pages" target="_blank" rel="noreferrer">./src/pages</a>)
 
-- 📦 [组件自动化加载](./src/components)
+- 📦 [组件自动化加载](<a href="./src/components" target="_blank" rel="noreferrer">./src/components</a>)
 
 - 🍍 [使用 Pinia 的状态管理](https://pinia.vuejs.org)
 
-- 📑 [布局系统](./src/layouts)
+- 📑 [布局系统](<a href="./src/layouts" target="_blank" rel="noreferrer">./src/layouts</a>)
 
 - 📲 [PWA](https://github.com/antfu/vite-plugin-pwa)
 
@@ -22,7 +22,7 @@
 
 - 😃 [各种图标集为你所用](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
 
-- 🌍 [I18n 国际化开箱即用](./locales)
+- 🌍 [I18n 国际化开箱即用](<a href="./src/locales" target="_blank" rel="noreferrer">./src/locales</a>)
 
 - 🗒 [Markdown 支持](https://github.com/antfu/vite-plugin-vue-markdown)
 

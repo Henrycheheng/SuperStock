@@ -13,7 +13,7 @@ loadEnv('development', process.cwd())
 - VITE\_开头的键值对后面的不会覆盖前面的。
 - NODE_ENV 的值后面的会覆盖前面的。
 
-## [node 中的 process.cwd()](/guide/node/process)
+## [node 中的 process.cwd()](<a href="/guide/node/process" target="_blank" rel="noreferrer">/guide/node/process</a>)
 
 ## 相关 API
 
