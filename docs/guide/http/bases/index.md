@@ -1,13 +1,13 @@
 # Http 模块
 
-## [基础](/guild/http/bases)
+## [基础](<a href="/guild/http/bases" target="_blank" rel="noreferrer">/guild/http/bases</a>)
 
-## [axios](/guild/http/axios)
+## [axios](<a href="/guild/http/axios" target="_blank" rel="noreferrer">/guild/http/axios</a>)
 
-## [cache](/guild/http/cache)
+## [cache](<a href="/guild/http/cache" target="_blank" rel="noreferrer">/guild/http/cache</a>)
 
-## [fetch](/guild/http/fetch)
+## [fetch](<a href="/guild/http/fetch" target="_blank" rel="noreferrer">/guild/http/cafetchche</a>)
 
-## [graphQl](/guild/http/graphQl)
+## [graphQl](<a href="/guild/http/graphQl" target="_blank" rel="noreferrer">/guild/http/graphQl</a>)
 
-## [apifox](/guild/http/apifox)
+## [apifox](<a href="/guild/http/apifox" target="_blank" rel="noreferrer">/guild/http/apifox</a>)

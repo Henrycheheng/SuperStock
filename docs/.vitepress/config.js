@@ -105,7 +105,17 @@ export default {
             {
               text: 'axios',
               link: '/guide/http/axios/',
-              items: [{ text: 'TS封装axios', link: '/guide/http/axios/demo' }],
+              items: [
+                {
+                  text: 'AxiosRequestConfig请求配置',
+                  link: '/guide/http/axios/AxiosRequestConfig',
+                },
+                { text: 'interceptor拦截器', link: '/guide/http/axios/interceptor' },
+                { text: 'TS封装axios', link: '/guide/http/axios/http' },
+                { text: 'api接口参数和接口的封装', link: '/guide/http/axios/api' },
+                { text: 'pinia中使用接口函数', link: '/guide/http/axios/piniaUseApi' },
+                { text: 'vue中使用pinia调用接口', link: '/guide/http/axios/vueuesPiniaApi' },
+              ],
             },
             {
               text: 'http缓存',
