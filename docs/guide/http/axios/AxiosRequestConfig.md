@@ -51,6 +51,7 @@ export interface AxiosRequestConfig<D = any> {
 ## RawAxiosHeaders
 
 ```ts
+// AxiosHeaderValue
 type AxiosHeaderValue = AxiosHeaders | string | string[] | number | boolean | null
 type RawAxiosHeaders = Record<string, AxiosHeaderValue>
 ```
