@@ -1,0 +1,13 @@
+effect()
+  => 触发设置操作 document.body.innerText = obj.test
+  => 进入get的陷阱
+      => 给set中添加不重复的effect
+      => 并将值返回
+
+  5秒后，执行设置操作
+    => 触发设置操作 obj.test = 'hello Vue3'
+    => 进入set陷阱
+      => 接受设置的新值并设置
+      => 执行set里存储的所有effect，并以最后一次为准
+    再微任务时限内，循环调用set
+  => 然后Proxy上面的值改变，通过Reflect映射到原对象

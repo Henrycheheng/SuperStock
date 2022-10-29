@@ -51,4 +51,10 @@ function error(message: string): never {
 
 // 类型断言
 const someValue: any = 'this is a string'
-const strLength: number = (someValue as string).length
+let strLength: number = (someValue as string).length
+
+// unkonwn
+const someValue1: unknown = 1
+
+// unkonwn类型的变量赋值给其他变量会报错
+// strLength = someValue1
