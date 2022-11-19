@@ -51,7 +51,7 @@ function error(message: string): never {
 
 // 类型断言
 const someValue: any = 'this is a string'
-let strLength: number = (someValue as string).length
+const strLength: number = (someValue as string).length
 
 // unkonwn
 const someValue1: unknown = 1
