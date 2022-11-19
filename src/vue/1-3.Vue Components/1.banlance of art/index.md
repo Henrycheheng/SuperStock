@@ -79,12 +79,11 @@ DOM 操作是不包 innerHTMl
 
 #### innerHTMl 和虚拟 DOM 的性能对比
 
-innerHTMl：
-      - const html = `<div class="alert"><span class=""></span></div>`
+innerHTMl： - const html = `<div class="alert"><span class=""></span></div>`
 
 div.innerHTML = html
 
-1. 要把字符串 html 解析成 DOM 树，-  **DOM 层面的计算**
+1. 要把字符串 html 解析成 DOM 树，- **DOM 层面的计算**
 2. 创建页面的性能：HTML 字符串拼接计算量 + innerHTMl 的 DOM 计算量
 
 虚拟 DOM 在创建的时候
@@ -112,17 +111,14 @@ const vNode = {
 - innerHTML: 重新做字符串的拼接
 - 虚拟 DOM: 只需要找出差异,
 
-
 ## 3 运行时和编译时
 
 纯运行时：
 
 ```js
 const obj = {
-	tag: 'div',
-    children: [
-        {tag: 'span', children: 'hello'}
-    ]
+  tag: 'div',
+  children: [{ tag: 'span', children: 'hello' }],
 }
 ```
 
